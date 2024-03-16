@@ -12,39 +12,35 @@ class RubixCube:
                     [["W"] * 3] * 3])
         self.cube = cube
 
-    def rotate_clockwise(self, face_to_rotate_by, side_faces):
-        self.cube[face_to_rotate_by] = np.rot90(self.cube[face_to_rotate_by], 3)
-        
-        temp = copy(self.cube[side_faces[0]][2])
-        self.cube[side_faces[0]][2] = self.cube[side_faces[1]][:][2][::-1]
+    def rotate_F(self):
+        self.cube[1] = np.rot90(self.cube[1], 3)
+        temp = np.copy(self.cube[0][2])  # save up
+        self.cube[0][2] = self.cube[4][:][2][::-1]  # write left into up
         for i in range(0, 3):
-            self.cube[side_faces[1]][i][2] = self.cube[side_faces[2]][0][i]
-        self.cube[side_faces[2]][0] = self.cube[side_faces[3]][:][0][::-1]
+            self.cube[4][i][2] = self.cube[5][0][i]  # write down into left
+        self.cube[5][0] = self.cube[2][:][0][::-1]  # write right into down
         for i in range(0, 3):
-            self.cube[side_faces[3]][i][0] = temp[i]
-
-    def rotate_F(self, clockwise=True):
-        self.rotate_clockwise(1, [0, 4, 5, 2])
+            self.cube[2][i][0] = temp[i]  # write up(temp) into right
 
     def rotate_R(self):
-        self.cube[1] = np.rot90(self.cube[1], 3)
-        temp = copy(self.cube[0][2])  # save up
-        self.cube[0][2] = self.cube[4][:][2][::-1]  # write left into up
+        self.cube[2] = np.rot90(self.cube[2], 3)
+        temp = np.copy(self.cube[1][:][2])  # save O
         for i in range(0, 3):
-            self.cube[4][i][2] = self.cube[5][0][i]  # write down into left
-        self.cube[5][0] = self.cube[2][:][0][::-1]  # write right into down
+            self.cube[1][i][2] = self.cube[5][i][2]
         for i in range(0, 3):
-            self.cube[2][i][0] = temp[i]  # write up(temp) into right
+            self.cube[5][i][2] = self.cube[3][3-1-i][0]
+        for i in range(0, 3):
+            self.cube[3][i][0] = self.cube[0][3-1-i][2]
+        for i in range(0, 3):
+            self.cube[0][i][2] = temp[i]
 
     def rotate_U(self):
-        self.cube[1] = np.rot90(self.cube[1], 3)
-        temp = copy(self.cube[0][2])  # save up
-        self.cube[0][2] = self.cube[4][:][2][::-1]  # write left into up
-        for i in range(0, 3):
-            self.cube[4][i][2] = self.cube[5][0][i]  # write down into left
-        self.cube[5][0] = self.cube[2][:][0][::-1]  # write right into down
-        for i in range(0, 3):
-            self.cube[2][i][0] = temp[i]  # write up(temp) into right
+        self.cube[0] = np.rot90(self.cube[0], 3)
+        temp = np.copy(self.cube[3][0])
+        self.cube[3][0] = self.cube[4][0][::-1]
+        self.cube[4][0] = self.cube[1][0]
+        self.cube[1][0] = self.cube[2][0]
+        self.cube[2][0] = temp
 
     def rotate_L(self):
         self.cube[1] = np.rot90(self.cube[1], 3)

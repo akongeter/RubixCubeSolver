@@ -26,5 +26,5 @@ if __name__ == '__main__':
             print("Yeah")
         else:
             print(func)
-            #cube.print_cube()
+            cube.print_cube()
 

@@ -13,9 +13,11 @@ if __name__ == '__main__':
                      , [["G00", "G01", "G02"], ["G10", "G11", "G12"], ["G20", "G21", "G22"]], [["W00", "W01", "W02"], ["W10", "W11", "W12"], ["W20", "W21", "W22"]]])
     b = np.copy(a)
     cube = rubixcube.RubixCube(a)
-    cube.print_face(0)
-    cube.print_face(1)
-    functions = [cube.rotate_F, cube.rotate_R, cube.rotate_L, cube.rotate_U, cube.rotate_D]
+    cube.print_face(5)
+    for i in range(0, 4):
+        cube.rotate_D()
+        cube.print_face(5)
+    functions = [cube.rotate_F, cube.rotate_R, cube.rotate_U, cube.rotate_L, cube.rotate_D]
     for func in functions:
         for i in range(0, 4):
             func()
@@ -24,5 +26,5 @@ if __name__ == '__main__':
             print("Yeah")
         else:
             print(func)
-            cube.print_cube()
+            #cube.print_cube()
 

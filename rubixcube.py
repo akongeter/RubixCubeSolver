@@ -89,6 +89,30 @@ class RubixCube:
         self.rotate_D()
         self.rotate_D()
 
+    def scramble_from_text_input(self, input="F2 R F' F"):
+        scrambles = input.strip().split(" ")
+        kind_to_rotate = {"F": self.rotate_F,
+                          "R": self.rotate_R,
+                          "U": self.rotate_U,
+                          "L": self.rotate_L,
+                          "D": self.rotate_D,
+                          "F'": self.rotate_F_prime,
+                          "R'": self.rotate_R_prime,
+                          "U'": self.rotate_U_prime,
+                          "L'": self.rotate_L_prime,
+                          "D'": self.rotate_D_prime}
+        for scramble in scrambles:
+            kind = scramble[0]
+            amount = 1
+            if len(scramble) == 2:
+                if scramble[1] == "'":
+                    kind = scramble
+                else:
+                    amount = int(scramble[1])
+            for i in range(amount):
+                kind_to_rotate[kind]()
+
+
     def print_cube(self):
         face_name = ["UP", "FRONT", "RIGHT", "BACK", "LEFT", "DOWN"]
         print("---------------CUBE---------------")

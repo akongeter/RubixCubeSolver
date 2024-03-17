@@ -35,7 +35,7 @@ class MyTestCase(unittest.TestCase):
                       [["W00", "W01", "W02"],
                        ["W10", "W11", "W12"],
                        ["W20", "W21", "W22"]]])
-        return np.copy(a)
+        return a
 
     def test_rotate_F(self):
         print("------Starting rotate_F Test------")

@@ -13,12 +13,9 @@ class RubixCubeEnv(gym.Env):
         self.cube = rubixcube.RubixCube()
         self.window_size = 512  # The size of the PyGame window
 
-        # Observations are dictionaries with the agent's and the target's location.
-        # Each location is encoded as an element of {0, ..., `size`}^2, i.e. MultiDiscrete([size, size]).
-        # TODO: observation space needs good observations
         self.observation_space = spaces.Dict(
             {
-                "cube": spaces.Box(0, 5, shape=(6, 3, 3), dtype=np.integer),
+                "cube": spaces.Box(0, 5, shape=(54, ), dtype=np.int_),
             }
         )
 
@@ -52,12 +49,12 @@ class RubixCubeEnv(gym.Env):
 
     def convert_array_to_num(self):
         letter_to_number = {"W": 5, "Y": 0, "R": 3, "G": 4, "B": 2, "O": 1}
-        num_array = np.zeros(self.cube.cube.shape)
-        for f in range(self.cube.cube):
+        num_array = np.zeros(self.cube.cube.shape, dtype=np.int_)
+        for f in range(len(self.cube.cube)):
             for i in range(3):
                 for j in range(3):
                     num_array[f, i, j] = letter_to_number[self.cube.cube[f, i, j]]
-        return num_array
+        return num_array.flatten()
 
     def _get_obs(self):
         return {"cube": self.convert_array_to_num()}
@@ -70,12 +67,12 @@ class RubixCubeEnv(gym.Env):
         super().reset(seed=seed)
 
         self.cube.reset_cube()
-        self.cube.scramble_cube_randomly()
+        self.cube.scramble_cube_randomly(1)
 
         observation = self._get_obs()
         info = self._get_info()
 
-        self._render_frame()
+        #self._render_frame()
 
         return observation, info
 
@@ -87,11 +84,11 @@ class RubixCubeEnv(gym.Env):
         observation = self._get_obs()
         info = self._get_info()
 
-        self._render_frame()
+        #self._render_frame()
 
         return observation, reward, terminated, False, info
 
-    def _render_frame(self):
+    def render(self):
         if self.window is None:
             pygame.init()
             pygame.display.init()

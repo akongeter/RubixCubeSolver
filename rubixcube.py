@@ -8,8 +8,12 @@ import random
 class RubixCube:
     def __init__(self, cube=None):
         if cube is None:
-            cube = np.array([[["Y"] * 3] * 3, [["O"] * 3] * 3, [["B"] * 3] * 3, [["R"] * 3] * 3, [["G"] * 3] * 3,
-                    [["W"] * 3] * 3])
+            cube = np.array([[["Y"] * 3] * 3,
+                             [["O"] * 3] * 3,
+                             [["B"] * 3] * 3,
+                             [["R"] * 3] * 3,
+                             [["G"] * 3] * 3,
+                             [["W"] * 3] * 3])
         self.cube = cube
         self.moves = []
 

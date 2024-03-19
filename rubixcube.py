@@ -143,6 +143,12 @@ class RubixCube:
             func_index = random.randint(0, 9)
             funcs[func_index]()
 
+    def reset_cube(self):
+        cube = np.array([[["Y"] * 3] * 3, [["O"] * 3] * 3, [["B"] * 3] * 3, [["R"] * 3] * 3, [["G"] * 3] * 3,
+                        [["W"] * 3] * 3])
+        self.cube = cube
+        self.moves = []
+
     def print_cube(self):
         face_name = ["UP", "FRONT", "RIGHT", "BACK", "LEFT", "DOWN"]
         print("---------------CUBE---------------")

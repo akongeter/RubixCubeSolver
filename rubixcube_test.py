@@ -87,6 +87,15 @@ class MyTestCase(unittest.TestCase):
             cube.rotate_D()
         self.assert_same_cube(a, b, cube.print_face(5))
 
+    def test_solved_functionality(self):
+        print("------Starting solved Test--------")
+        a = np.array([[["Y"] * 3] * 3, [["O"] * 3] * 3, [["B"] * 3] * 3, [["R"] * 3] * 3, [["G"] * 3] * 3,
+                      [["W"] * 3] * 3])
+        cube = rubixcube.RubixCube(a)
+        self.assertEqual(True, cube.is_cube_solved())
+
+        cube.rotate_F()
+        self.assertEqual(False, cube.is_cube_solved())
 
 
 if __name__ == '__main__':

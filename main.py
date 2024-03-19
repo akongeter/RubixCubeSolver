@@ -31,8 +31,10 @@ if __name__ == '__main__':
                    ["W10", "W11", "W12"],
                    ["W20", "W21", "W22"]]])
 
+    c = np.array([[["Y"] * 3] * 3, [["O"] * 3] * 3, [["B"] * 3] * 3, [["R"] * 3] * 3, [["G"] * 3] * 3,
+                     [["W"] * 3] * 3])
+
     b = np.copy(a)
-    cube = rubixcube.RubixCube(a)
-    cube.scramble_from_text_input("F2 R2")
-    cube.print_cube()
+    cube = rubixcube.RubixCube(c)
+
 
